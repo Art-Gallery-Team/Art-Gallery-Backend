@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 const port = 3000;
@@ -17,9 +18,9 @@ db.connect((err) => {
   console.log('Connected to the database.');
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use('/', userRoutes);
+
+
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
