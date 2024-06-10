@@ -1,4 +1,4 @@
-const db = require('../models/User');
+const db = require('../models/database');
 
 exports.getAllUsers = (req, res) => {
   const sql = 'SELECT * FROM users';
