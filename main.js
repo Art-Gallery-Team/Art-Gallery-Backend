@@ -5,6 +5,9 @@ const express = require('express');
 // Import the user_routes.js file
 const userRoutes = require('./routes/user_routes');
 
+// Import the customer_routes.js file
+const customerRoutes = require('./routes/customer_routes');
+
 // Import the art _routes.js file
 const artRoutes = require('./routes/art_routes');
 
@@ -28,6 +31,7 @@ main.get('/', (req, res) => {
 
 });
 main.use('/', userRoutes);
+main.use('/', customerRoutes);
 main.use('/', artRoutes);
 
 // Serve static files from the "images" directory
