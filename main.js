@@ -17,8 +17,14 @@ const userRoutes = require('./routes/user_routes');
 // Import the customer_routes.js file
 const customerRoutes = require('./routes/customer_routes');
 
-// Import the art _routes.js file
+// Import the art_routes.js file
 const artRoutes = require('./routes/art_routes');
+
+// Import the professional_routes.js file
+const professionalRoutes = require('./routes/professional_routes');
+
+// Import the exhibition_routes.js file
+const exhibitionRoutes = require('./routes/exhibition_routes');
 
 
 main.get('/', (req, res) => {
@@ -29,8 +35,15 @@ main.get('/', (req, res) => {
         </p>
         <p>
             <a href="/images">Go to Arts</a>
-        </p><p>
+        </p>
+        <p>
             <a href="/customers">Go to Customers</a>
+        </p>
+        <p>
+            <a href="/professionals">Go to Professionals</a>
+        </p>
+        <p>
+            <a href="/exhibitions">Go to Exhibitions</a>
         </p>
     `);
 
@@ -38,6 +51,8 @@ main.get('/', (req, res) => {
 main.use('/', userRoutes);
 main.use('/', customerRoutes);
 main.use('/', artRoutes);
+main.use('/', professionalRoutes);
+main.use('/', exhibitionRoutes);
 
 // Serve static files from the "images" directory
 main.use('/images', express.static(path.join(__dirname, 'images')));
