@@ -6,7 +6,7 @@ const express = require('express');
 
 // Import the signup strategy
 require('./passport/signupStrategy');
-const app = express();
+// const app = express();
 
 const main = express();
 const port = 3000;
