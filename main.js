@@ -1,18 +1,9 @@
 const path = require('path');
 require('dotenv').config();
 const express = require('express');
-// const session = require('express-session');
-
-
-// Import the signup strategy
-require('./passport/signupStrategy');
-// const app = express();
 
 const main = express();
 const port = 3000;
-
-// Import the user_routes.js file
-const userRoutes = require('./routes/user_routes');
 
 // Import the customer_routes.js file
 const customerRoutes = require('./routes/customer_routes');
@@ -31,9 +22,6 @@ main.get('/', (req, res) => {
   res.send(`
         <h1>Welcome to the Art API!</h1>
         <p>
-            <a href="/users">Go to Users</a>
-        </p>
-        <p>
             <a href="/images">Go to Arts</a>
         </p>
         <p>
@@ -48,7 +36,7 @@ main.get('/', (req, res) => {
     `);
 
 });
-main.use('/', userRoutes);
+
 main.use('/', customerRoutes);
 main.use('/', artRoutes);
 main.use('/', professionalRoutes);
