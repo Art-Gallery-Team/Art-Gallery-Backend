@@ -1,9 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/ProfessionalController');
+const professionalController = require('../controllers/ProfessionalController');
 
-router.get('/professionals', userController.getAllProfessionals);
+// Handle GET requests
+router.get('/professionals', professionalController.getAllProfessionals);
+router.get('/professionals/:id', professionalController.getProfessionalById);
 
-router.get('/professionals/:id', userController.getProfessionalById);
+// Handle POST requests
+router.post('/professionals', professionalController.createProfessional);
+
+// Handle PUT requests
+router.put('/professionals/:id', professionalController.updateProfessional);
+
+// Handle DELETE requests
+router.delete('/professionals/:id', professionalController.deleteProfessional);
+
 
 module.exports = router;

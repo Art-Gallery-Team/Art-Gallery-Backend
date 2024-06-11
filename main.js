@@ -3,7 +3,10 @@ require('dotenv').config();
 const express = require('express');
 
 const main = express();
-const port = 3000;
+const port = 3001;
+
+// Middleware to parse JSON bodies
+main.use(express.json());
 
 // Import the customer_routes.js file
 const customerRoutes = require('./routes/customer_routes');
@@ -45,18 +48,10 @@ main.use('/', exhibitionRoutes);
 // Serve static files from the "images" directory
 main.use('/images', express.static(path.join(__dirname, 'images')));
 
-
-
-
-
-
-
-
-
-
 main.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
+
 
 
 

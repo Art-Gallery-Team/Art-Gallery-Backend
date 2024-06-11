@@ -26,8 +26,16 @@ exports.createProfessional = (req, res) => {
 exports.deleteProfessional = (req, res) => {
     const id = req.params.id;
     Professional.deleteProfessional(id, (err, results) => {
-        if (err) throw err;
-        res.send(results);
+        if (err) {
+            console.error(`Error deleting professional with ID ${id}:`, err);
+            res.status(500).send("Internal Server Error");
+            return;
+        }
+        if (results.affectedRows === 0) {
+            res.status(404).send("Professional not found");
+            return;
+        }
+        res.send("Professional deleted successfully");
     });
 };
 
