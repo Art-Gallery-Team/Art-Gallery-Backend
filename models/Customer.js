@@ -18,9 +18,10 @@ const Customer = {
 
     // Add more methods as needed for other user operations
     create: function(newCustomer, callback) {
-        const sql = 'INSERT INTO customer_info SET ?';
-        db.query(sql, newCustomer, callback);
-    },
+    const sql = 'INSERT INTO customer_info (First_Name, Last_Name, customer_email, password, Phone_Number, Address, Zip) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    const values = [newCustomer.First_Name, newCustomer.Last_Name, newCustomer.customer_email, newCustomer.password, newCustomer.Phone_Number, newCustomer.Address, newCustomer.Zip];
+    db.query(sql, values, callback);
+},
 
     update: function(id, updatedCustomer, callback) {
         const sql = 'UPDATE customer_info SET ? WHERE user_id = ?';

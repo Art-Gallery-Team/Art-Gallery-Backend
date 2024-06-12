@@ -17,12 +17,43 @@ exports.getCustomerById = (req, res) => {
 };
 
 exports.createCustomer = (req, res) => {
-    const newCustomer = req.body;
+    if (!req.body || !req.body.customer) {
+        return res.status(400).send({ message: 'Missing customer object in request body' });
+    }
+
+    const newCustomer = req.body.customer;
+
+    // Defining expected keys and types
+    const expectedKeys = {
+        First_Name: 'string',
+        Last_Name: 'string',
+        customer_email: 'string',
+        password: 'string',
+        Phone_Number: 'int',
+        Address: 'string',
+        Zip: 'string'
+    };
+
+    //Validate the new customer object
+    for (const key in expectedKeys) {
+        if (!newCustomer.hasOwnProperty(key)) {
+            return res.status(400).send({ message: `Missing ${key} in request body` });
+        }
+
+        if (typeof newCustomer[key] !== expectedKeys[key]) {
+            return res.status(400).send({ message: `${key} must be of type ${expectedKeys[key]}` });
+        }
+    }
+
     Customer.create(newCustomer, (err, results) => {
-        if (err) throw err;
-        res.send(results);
+        if (err) {
+            console.log(err); // Log the error message
+            res.status(500).send({ message: 'Error creating customer' });
+        } else {
+            res.send(results);
+        }
     });
-}
+};
 
 exports.updateCustomer = (req, res) => {
     const id = req.params.id;
